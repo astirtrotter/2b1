@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace TBOAdmin
 {
@@ -28,6 +29,27 @@ namespace TBOAdmin
 
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+      services.AddSwaggerGen(c =>
+      {
+        c.SwaggerDoc("v1", new Info {
+          Title = "ToBeOne API",
+          Version = "v1",
+          Description = "ToBeOne Web API",
+          TermsOfService = "None",
+          Contact = new Contact
+          {
+            Name = "Pro Dev",
+            Email = "prodev9999@gmail.com",
+            Url = "https://github.com/prodev9999"
+          },
+          License = new License
+          {
+            Name = "MIT",
+            Url = "https://opensource.org/licenses/MIT"
+          }
+        });
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,11 +68,19 @@ namespace TBOAdmin
       app.UseHttpsRedirection();
       app.UseStaticFiles();
       app.UseCookiePolicy();
+      app.UseMvcWithDefaultRoute();
 
-      app.UseMvc(routes =>
+      app.UseSwagger();
+      app.UseSwaggerUI(c =>
       {
-        routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToBeOne API v1");
+        c.RoutePrefix = string.Empty;
       });
+
+      //app.UseMvc(routes =>
+      //{
+      //  routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+      //});
     }
   }
 }
