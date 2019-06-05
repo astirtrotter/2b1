@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using TBOAdmin.Models;
 
 namespace TBOAdmin
 {
@@ -32,7 +33,8 @@ namespace TBOAdmin
 
       services.AddSwaggerGen(c =>
       {
-        c.SwaggerDoc("v1", new Info {
+        c.SwaggerDoc("v1", new Info
+        {
           Title = "ToBeOne API",
           Version = "v1",
           Description = "ToBeOne Web API",
@@ -50,6 +52,8 @@ namespace TBOAdmin
           }
         });
       });
+
+      services.AddTransient<AppDb>(_ => new AppDb(Configuration.GetConnectionString("DefaultConnection")));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
