@@ -1,0 +1,32 @@
+Database
+	User
+	Admin
+	Supporter
+	Family
+	Notification
+
+
+API (q=query, s=sort, c=column, p=param)
+	GET 								/
+	GET POST						/login?redirectTo=url
+			POST						/logout
+	GET									/users?qsc
+	GET POST DELETE			/users/{userId}
+	GET POST						/users/{userId}/setting
+	GET									/users/{userId}/view?as=(tree|table)
+			POST DELETE	PUT	/users/{userId}/connect?as=(father|mother|child|...)
+	GET 								/users/{userId}/search?qs
+	GET 								/users/{userId}/notify?qsc
+	GET POST DELETE			/users/{userId}/notify/{notifyId}
+	GET									/about
+	GET							PUT	/notify
+	GET	POST DELETE			/notify/{notifyId}
+
+	GET POST DELETE	PUT	/
+	GET POST DELETE	PUT	/
+	GET POST DELETE	PUT	/
+	GET POST DELETE	PUT	/
+	GET POST DELETE	PUT	/
+	GET POST DELETE	PUT	/
+	GET POST DELETE	PUT	/
+	
