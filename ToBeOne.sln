@@ -7,7 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TBOAdmin", "TBOAdmin\TBOAdm
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20E9BC9F-92BD-4F05-B7E8-ADB9CD1C1315}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		.gitignore = .gitignore
+		backend.txt = backend.txt
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
