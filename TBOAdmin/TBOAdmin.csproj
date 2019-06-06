@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190606120256_New20190606.cs" />
+    <Compile Remove="Migrations\20190606120256_New20190606.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.11-servicing-32099" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="MySql.Data" Version="8.0.16" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
 </Project>
