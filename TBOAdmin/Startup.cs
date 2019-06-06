@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
-using TBOAdmin.Models;
 
 namespace TBOAdmin
 {
@@ -18,19 +18,27 @@ namespace TBOAdmin
 
     public IConfiguration Configuration { get; }
 
+    public static string ConnectionString { get; private set; }
+
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      // cookie
       services.Configure<CookiePolicyOptions>(options =>
       {
         // This lambda determines whether user consent for non-essential cookies is needed for a given request.
         options.CheckConsentNeeded = context => true;
         options.MinimumSameSitePolicy = SameSiteMode.None;
       });
+      
+      // sql server database
+      ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+      services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
 
-
+      // mvc
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+      // swagger
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new Info
@@ -52,8 +60,6 @@ namespace TBOAdmin
           }
         });
       });
-
-      services.AddTransient<AppDb>(_ => new AppDb(Configuration.GetConnectionString("DefaultConnection")));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,7 +78,6 @@ namespace TBOAdmin
       app.UseHttpsRedirection();
       app.UseStaticFiles();
       app.UseCookiePolicy();
-      app.UseMvcWithDefaultRoute();
 
       app.UseSwagger();
       app.UseSwaggerUI(c =>
@@ -81,6 +86,7 @@ namespace TBOAdmin
         c.RoutePrefix = string.Empty;
       });
 
+      app.UseMvcWithDefaultRoute();
       //app.UseMvc(routes =>
       //{
       //  routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
