@@ -35,9 +35,6 @@ namespace TBOAdmin
       ConnectionString = Configuration.GetConnectionString("DefaultConnection");
       services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
 
-      // mvc
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
       // swagger
       services.AddSwaggerGen(c =>
       {
@@ -60,6 +57,9 @@ namespace TBOAdmin
           }
         });
       });
+
+      // mvc
+      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,14 +83,14 @@ namespace TBOAdmin
       app.UseSwaggerUI(c =>
       {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToBeOne API v1");
-        //c.RoutePrefix = string.Empty;
+        c.RoutePrefix = string.Empty;
       });
 
-      app.UseMvcWithDefaultRoute();
-      //app.UseMvc(routes =>
-      //{
-      //  routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
-      //});
+      //app.UseMvcWithDefaultRoute();
+      app.UseMvc(routes =>
+      {
+        routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
+      });
     }
   }
 }
