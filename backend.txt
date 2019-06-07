@@ -6,21 +6,23 @@ Database
 	Notification
 
 
-API (q=query, s=sort, c=column, p=param)
-	GET 								/
-	GET POST						/login?redirectTo=url
-			POST						/logout
-	GET									/users?qsc
-	GET POST DELETE			/users/{userId}
-	GET POST						/users/{userId}/setting
-	GET									/users/{userId}/view?as=(tree|table)
-			POST DELETE	PUT	/users/{userId}/connect?as=(father|mother|child|...)
-	GET 								/users/{userId}/search?qs
-	GET 								/users/{userId}/notify?qsc
-	GET POST DELETE			/users/{userId}/notify/{notifyId}
-	GET									/about
-	GET							PUT	/notify
-	GET	POST DELETE			/notify/{notifyId}
+(q=query, s=sort, c=column, p=param)
+Admin
+	GET 								/												** dashboard
+	GET POST						/login?redirectTo=url		** login
+			POST						/logout									** logout
+	GET							PUT	/notify									** notify
+	GET	POST DELETE			/notify/{notifyId}			** 
+
+			POST						/api/v1/login										** user login
+			POST						/api/v1/logout									** user logout
+	GET									/api/v1/users?qsc								** list users (require authorization of admin or user)
+	GET POST DELETE			/api/v1/users/{userId}					** user detail (require authorization of admin or user)
+	GET POST						/api/v1/users/{userId}/setting	** user setting
+	GET									/api/v1/users/{userId}/family		** user's family
+			POST DELETE	PUT	/api/v1/users/{userId}/connect?as=(father|mother|child|...) ** request/remove/accept family connection
+	GET 								/api/v1/users/notify?qsc				** list notifications
+	GET POST DELETE			/api/v1/users/notify/{notifyId} ** notification detail
 
 	GET POST DELETE	PUT	/
 	GET POST DELETE	PUT	/
