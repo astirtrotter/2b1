@@ -3,7 +3,7 @@ Platform for family/relatives and friends.
 
 solution structure
 
-## TBOWeb (React/Next)
+## TBOUser (React/Redux)
 Web app to be used by general users.
 
 ## TBOHelp (Vue/Nuxt)
@@ -12,10 +12,10 @@ Web app to be used by general users for help & support.
 ## TBOCommunity (TBD)
 Web app to be used by general users for community & forum.
 
-## TBOAdmin (C#/ASP.NET Core MVC)
-Restful APIs and CMS to be used by admins & help support team.
+## TBOBackEnd (C#/ASP.NET Core)
+Expose Restful APIs.
 
-## Database (MySQL 8.0)
+## Database (MSSQL)
 
 ## License
 MIT License
