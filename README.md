@@ -1,16 +1,11 @@
 # ToBeOne
 Platform for family/relatives and friends.
 
-solution structure
+## TBOAdmin (React/Redux)
+Web app to be used by admins.
 
-## TBOUser (React/Redux)
-Web app to be used by general users.
-
-## TBOHelp (Vue/Nuxt)
-Web app to be used by general users for help & support.
-
-## TBOCommunity (TBD)
-Web app to be used by general users for community & forum.
+## TBOUser (Vue/Vuex)
+Web app to be used by users.
 
 ## TBOBackEnd (C#/ASP.NET Core)
 Expose Restful APIs.
