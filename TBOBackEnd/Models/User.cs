@@ -1,6 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TBOAdmin.Models
+namespace TBOBackEnd.Models
 {
   public class User
   {
@@ -14,7 +18,5 @@ namespace TBOAdmin.Models
     public string LastName { get; set; }
 
     public string FullName { get => $"{FirstName} {LastName}"; }
-
-
   }
 }

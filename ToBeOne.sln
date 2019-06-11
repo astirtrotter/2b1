@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBOBackEnd", "TBOBackEnd\TBOBackEnd.csproj", "{B29C0A36-5F6C-4921-9DE4-933B4F5148B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{A43D7C2C-73F0-4691-BA1A-23E3412228A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A43D7C2C-73F0-4691-BA1A-23E3412228A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A43D7C2C-73F0-4691-BA1A-23E3412228A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B29C0A36-5F6C-4921-9DE4-933B4F5148B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B29C0A36-5F6C-4921-9DE4-933B4F5148B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B29C0A36-5F6C-4921-9DE4-933B4F5148B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B29C0A36-5F6C-4921-9DE4-933B4F5148B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
