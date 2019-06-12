@@ -8,8 +8,23 @@ using TBOBackEnd.Models;
 
 namespace TBOBackEnd.Controllers
 {
+  [Route("api/[controller]")]
   public class UsersController : Controller
   {
+    private static string[] Summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+
+    [HttpGet("[action]")]
+    public IEnumerable<User> AllUsers()
+    {
+      var rng = new Random();
+      return Enumerable.Range(1, 5).Select(index => new User
+      {
+        Id = $"{index}",
+        FirstName = $"FName{index}",
+        LastName = $"LName{index}",
+      });
+    }
+    /*
     private readonly AppDbContext _context;
 
     public UsersController(AppDbContext context)
@@ -147,5 +162,6 @@ namespace TBOBackEnd.Controllers
     {
       return _context.Users.Any(e => e.Id == id);
     }
+    */
   }
 }
