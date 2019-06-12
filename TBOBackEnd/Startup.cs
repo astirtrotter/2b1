@@ -35,6 +35,16 @@ namespace TBOBackEnd
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+      services.AddCors(options =>
+      {
+        options.AddPolicy("default", policy =>
+        {
+          policy.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+      });
+
       // Register the Swagger services
       services.AddSwaggerDocument(config =>
       {
@@ -62,6 +72,8 @@ namespace TBOBackEnd
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
+      app.UseCors("default");
+
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
