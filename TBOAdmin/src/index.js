@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
+import { registerObserver } from 'react-perf-devtool';
 import configureStore from './store/configureStore';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -19,6 +20,8 @@ const initialState = window.initialReduxState;
 const store = configureStore(history, initialState);
 
 const rootElement = document.getElementById('root');
+
+registerObserver();
 
 ReactDOM.render(
   <Provider store={store}>
