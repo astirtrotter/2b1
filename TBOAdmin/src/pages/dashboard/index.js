@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Dashboard = props => (
+const Index = props => (
   <div>
     <h1>Hello, world!</h1>
     <p>Welcome to your new single-page application, built with:</p>
@@ -20,4 +20,4 @@ const Dashboard = props => (
   </div>
 );
 
-export default connect()(Dashboard);
+export default connect()(Index);
