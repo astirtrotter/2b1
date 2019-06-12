@@ -4,16 +4,19 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actionCreators } from '../../store/WeatherForecasts';
 
-class Index extends Component {
+class FetchData extends Component {
   componentWillMount() {
     // This method runs when the component is first added to the page
-    const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
-    this.props.requestWeatherForecasts(startDateIndex);
+    this.requestWeatherForecasts(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
     // This method runs when incoming props (e.g., route params) change
-    const startDateIndex = parseInt(nextProps.match.params.startDateIndex, 10) || 0;
+    this.requestWeatherForecasts(nextProps);
+  }
+
+  requestWeatherForecasts(props) {
+    const startDateIndex = parseInt(props.match.params.startDateIndex, 10) || 0;
     this.props.requestWeatherForecasts(startDateIndex);
   }
 
@@ -58,14 +61,14 @@ function renderPagination(props) {
   const prevStartDateIndex = (props.startDateIndex || 0) - 5;
   const nextStartDateIndex = (props.startDateIndex || 0) + 5;
 
-  return <p className='clearfix text-center'>
-    <Link className='btn btn-default pull-left' to={`/fetchdata/${prevStartDateIndex}`}>Previous</Link>
-    <Link className='btn btn-default pull-right' to={`/fetchdata/${nextStartDateIndex}`}>Next</Link>
+  return <ul className='pager clearfix text-center'>
+    <li className="previous"><Link to={`/fetchdata/${prevStartDateIndex}`}>Previous</Link></li>
+    <li className="next"><Link to={`/fetchdata/${nextStartDateIndex}`}>Next</Link></li>
     {props.isLoading ? <span>Loading...</span> : []}
-  </p>;
+  </ul>;
 }
 
 export default connect(
   state => state.weatherForecasts,
   dispatch => bindActionCreators(actionCreators, dispatch)
-)(Index);
+)(FetchData);
