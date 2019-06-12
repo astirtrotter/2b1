@@ -8,7 +8,7 @@ export default props => (
   <Navbar inverse fixedTop fluid collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to={'/'}>TBOAdmin</Link>
+        <Link to={'/'}>Admin Panel</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
@@ -16,7 +16,7 @@ export default props => (
       <Nav>
         <LinkContainer to={'/'} exact>
           <NavItem>
-            <Glyphicon glyph='home' /> Home
+            <Glyphicon glyph='home' /> Dashboard
           </NavItem>
         </LinkContainer>
         <LinkContainer to={'/counter'}>
