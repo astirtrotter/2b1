@@ -30,10 +30,9 @@ namespace TBOBackEnd.Models
     [Remote(action: "VerifyEmail", controller: "Admins")]
     public string Email { get; set; }
 
-    //[Required]
-    //[Display(Name = "Role")]
-    //public string AdminRoleId { get; set; }
-    //public AdminRole AdminRole { get; set; }
+    [Required]
+    public string AdminRoleId { get; set; }
+    public AdminRole AdminRole { get; set; }
 
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{0:G}", ApplyFormatInEditMode = true, NullDisplayText = "(no access)")]
