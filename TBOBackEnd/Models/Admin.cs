@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using TBOBackEnd.Models.Many2ManyRelationship;
 
 namespace TBOBackEnd.Models
 {
@@ -29,6 +30,10 @@ namespace TBOBackEnd.Models
     [EmailAddress]
     [Remote(action: "VerifyEmail", controller: "Admins")]
     public string Email { get; set; }
+
+    [Required]
+    public string AdminAccountStatusId { get; set; }
+    public AdminAccountStatus AdminAccountStatus { get; set; }
 
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{0:G}", ApplyFormatInEditMode = true, NullDisplayText = "(no access)")]

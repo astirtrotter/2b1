@@ -4,16 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using TBOBackEnd.Models.Many2ManyRelationship;
 
 namespace TBOBackEnd.Models
 {
-  public class AdminRole
+  public class AdminAccountStatus
   {
     [Key]
     [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string Id { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [StringLength(50, MinimumLength = 1, ErrorMessage = "{0} length must be between {2} and {1}.")]
@@ -24,7 +23,6 @@ namespace TBOBackEnd.Models
 
     /*****************************************************************************************************/
 
-    public ICollection<AdminAdminRole> AdminAdminRoles { get; set; }
-    public ICollection<AdminRolePermission> AdminRolePermissions { get; set; }
+    public ICollection<Admin> Admins { get; set; }
   }
 }
