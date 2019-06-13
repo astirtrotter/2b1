@@ -10,8 +10,8 @@ using TBOBackEnd;
 namespace TBOBackEnd.Migrations
 {
     [DbContext(typeof(_AppDbContext))]
-    [Migration("20190613164843_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190613192526_Mg1")]
+    partial class Mg1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,8 +26,7 @@ namespace TBOBackEnd.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AdminRoleId")
-                        .IsRequired();
+                    b.Property<int>("AdminAccountStatusId");
 
                     b.Property<string>("Email")
                         .IsRequired();
@@ -45,23 +44,29 @@ namespace TBOBackEnd.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdminRoleId");
+                    b.HasIndex("AdminAccountStatusId");
 
                     b.ToTable("Admins");
                 });
 
-            modelBuilder.Entity("TBOBackEnd.Models.AdminPermission", b =>
+            modelBuilder.Entity("TBOBackEnd.Models.AdminAccountStatus", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("AccountStatus");
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.HasKey("AccountStatus");
 
-                    b.HasKey("Id");
+                    b.ToTable("AdminAccountStatus");
+                });
+
+            modelBuilder.Entity("TBOBackEnd.Models.AdminPermission", b =>
+                {
+                    b.Property<int>("Permission");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Permission");
 
                     b.ToTable("AdminPermissions");
                 });
@@ -82,27 +87,6 @@ namespace TBOBackEnd.Migrations
                     b.ToTable("AdminRoles");
                 });
 
-            modelBuilder.Entity("TBOBackEnd.Models.AdminRolePermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AdminPermissionId")
-                        .IsRequired();
-
-                    b.Property<string>("AdminRoleId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdminPermissionId");
-
-                    b.HasIndex("AdminRoleId");
-
-                    b.ToTable("AdminRolePermission");
-                });
-
             modelBuilder.Entity("TBOBackEnd.Models.AdminToken", b =>
                 {
                     b.Property<string>("Id")
@@ -121,15 +105,76 @@ namespace TBOBackEnd.Migrations
                     b.ToTable("AdminTokens");
                 });
 
+            modelBuilder.Entity("TBOBackEnd.Models.Many2ManyRelationship.AdminAdminRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdminId")
+                        .IsRequired();
+
+                    b.Property<string>("AdminRoleId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
+
+                    b.HasIndex("AdminRoleId");
+
+                    b.ToTable("AdminAdminRole");
+                });
+
+            modelBuilder.Entity("TBOBackEnd.Models.Many2ManyRelationship.AdminRolePermission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AdminPermissionId");
+
+                    b.Property<string>("AdminRoleId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminPermissionId");
+
+                    b.HasIndex("AdminRoleId");
+
+                    b.ToTable("AdminRolePermission");
+                });
+
             modelBuilder.Entity("TBOBackEnd.Models.Admin", b =>
                 {
-                    b.HasOne("TBOBackEnd.Models.AdminRole", "AdminRole")
+                    b.HasOne("TBOBackEnd.Models.AdminAccountStatus", "AdminAccountStatus")
                         .WithMany("Admins")
+                        .HasForeignKey("AdminAccountStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TBOBackEnd.Models.AdminToken", b =>
+                {
+                    b.HasOne("TBOBackEnd.Models.Admin", "Admin")
+                        .WithMany("AdminTokens")
+                        .HasForeignKey("AdminId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TBOBackEnd.Models.Many2ManyRelationship.AdminAdminRole", b =>
+                {
+                    b.HasOne("TBOBackEnd.Models.Admin", "Admin")
+                        .WithMany("AdminAdminRoles")
+                        .HasForeignKey("AdminId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TBOBackEnd.Models.AdminRole", "AdminRole")
+                        .WithMany("AdminAdminRoles")
                         .HasForeignKey("AdminRoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TBOBackEnd.Models.AdminRolePermission", b =>
+            modelBuilder.Entity("TBOBackEnd.Models.Many2ManyRelationship.AdminRolePermission", b =>
                 {
                     b.HasOne("TBOBackEnd.Models.AdminPermission", "AdminPermission")
                         .WithMany("AdminRolePermissions")
@@ -139,14 +184,6 @@ namespace TBOBackEnd.Migrations
                     b.HasOne("TBOBackEnd.Models.AdminRole", "AdminRole")
                         .WithMany("AdminRolePermissions")
                         .HasForeignKey("AdminRoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TBOBackEnd.Models.AdminToken", b =>
-                {
-                    b.HasOne("TBOBackEnd.Models.Admin", "Admin")
-                        .WithMany("AdminTokens")
-                        .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

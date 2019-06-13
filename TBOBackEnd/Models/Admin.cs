@@ -32,7 +32,7 @@ namespace TBOBackEnd.Models
     public string Email { get; set; }
 
     [Required]
-    public string AdminAccountStatusId { get; set; }
+    public AccountStatus AdminAccountStatusId { get; set; }
     public AdminAccountStatus AdminAccountStatus { get; set; }
 
     [DataType(DataType.DateTime)]

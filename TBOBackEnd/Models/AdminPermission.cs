@@ -14,14 +14,14 @@ namespace TBOBackEnd.Models
     [Key]
     [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public Permission permission { get; set; }
+    public Permission Permission { get; set; }
 
     [DataType(DataType.MultilineText)]
     public string Description { get; set; }
 
     /*****************************************************************************************************/
 
-    public virtual string Name { get => permission.ToName(); }
+    public virtual string Name { get => Permission.ToName(); }
 
     public ICollection<AdminRolePermission> AdminRolePermissions { get; set; }
 

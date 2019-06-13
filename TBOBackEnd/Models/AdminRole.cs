@@ -31,6 +31,6 @@ namespace TBOBackEnd.Models
 
     public bool HasPermission(Permission permission) =>
       AdminRolePermissions.Any(adminRolePermission =>
-          adminRolePermission.AdminPermission.permission == permission);
+          adminRolePermission.AdminPermission.Permission == permission);
   }
 }

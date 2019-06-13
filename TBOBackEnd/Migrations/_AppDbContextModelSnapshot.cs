@@ -24,10 +24,7 @@ namespace TBOBackEnd.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AdminAccountStatusId")
-                        .IsRequired();
-
-                    b.Property<int?>("AdminAccountStatusId1");
+                    b.Property<int>("AdminAccountStatusId");
 
                     b.Property<string>("Email")
                         .IsRequired();
@@ -45,40 +42,29 @@ namespace TBOBackEnd.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdminAccountStatusId1");
+                    b.HasIndex("AdminAccountStatusId");
 
                     b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("TBOBackEnd.Models.AdminAccountStatus", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("AccountStatus");
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
+                    b.HasKey("AccountStatus");
 
                     b.ToTable("AdminAccountStatus");
                 });
 
             modelBuilder.Entity("TBOBackEnd.Models.AdminPermission", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Permission");
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
+                    b.HasKey("Permission");
 
                     b.ToTable("AdminPermissions");
                 });
@@ -143,8 +129,7 @@ namespace TBOBackEnd.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AdminPermissionId")
-                        .IsRequired();
+                    b.Property<int>("AdminPermissionId");
 
                     b.Property<string>("AdminRoleId")
                         .IsRequired();
@@ -162,7 +147,8 @@ namespace TBOBackEnd.Migrations
                 {
                     b.HasOne("TBOBackEnd.Models.AdminAccountStatus", "AdminAccountStatus")
                         .WithMany("Admins")
-                        .HasForeignKey("AdminAccountStatusId1");
+                        .HasForeignKey("AdminAccountStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TBOBackEnd.Models.AdminToken", b =>
