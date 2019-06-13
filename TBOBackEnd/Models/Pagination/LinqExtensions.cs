@@ -13,7 +13,6 @@ namespace TBOBackEnd.Models.Pagination
       result.CurrentPage = page;
       result.PageSize = pageSize;
       result.TotalCount = query.Count();
-
       result.PageCount = (int)Math.Ceiling((double)result.TotalCount / pageSize);
 
       var skip = (page - 1) * pageSize;
