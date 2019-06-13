@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,20 +9,28 @@ using TBOBackEnd.Models;
 
 namespace TBOBackEnd.Database
 {
-  public static class SeedData
+  public static partial class SeedData
   {
-    public static void Initialize(IServiceProvider serviceProvider)
+    public static IWebHost InitDatabase(this IWebHost host)
     {
-      var context = serviceProvider.GetRequiredService<_AppDbContext>();
-      context.Database.EnsureCreated();
-      if (!context.Admins.Any())
+      using (var scope = host.Services.CreateScope())
       {
-        context.Admins.AddRange(new List<Admin>
+        var serviceProvider = scope.ServiceProvider;
+        try
         {
-
-        });
-        context.SaveChanges();
+          var context = serviceProvider.GetRequiredService<_AppDbContext>();
+          context.Database.EnsureCreated();
+          SeedAdmins(context);
+          SeedAdminRoles(context);
+        }
+        catch (Exception e)
+        {
+          var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+          logger.LogError(e, "An error occurred while seeding the database.");
+        }
       }
+
+      return host;
     }
   }
 }
