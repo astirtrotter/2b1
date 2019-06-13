@@ -46,5 +46,11 @@ namespace TBOBackEnd.Models
 
     public ICollection<AdminAdminRole> AdminAdminRoles { get; set; }
     public ICollection<AdminToken> AdminTokens { get; set; }
+
+    /*****************************************************************************************************/
+
+    public bool HasPermission(Permission permission) =>
+      AdminAdminRoles.Any(adminAdminRole =>
+        adminAdminRole.AdminRole.HasPermission(permission));
   }
 }

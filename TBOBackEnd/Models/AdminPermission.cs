@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,18 +13,45 @@ namespace TBOBackEnd.Models
   {
     [Key]
     [Required]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string Id { get; set; }
-
-    [Required]
-    [StringLength(50, MinimumLength = 1, ErrorMessage = "{0} length must be between {2} and {1}.")]
-    public string Name { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
+    public Permission permission { get; set; }
 
     [DataType(DataType.MultilineText)]
     public string Description { get; set; }
 
     /*****************************************************************************************************/
+
+    public virtual string Name { get => permission.ToName(); }
+
     public ICollection<AdminRolePermission> AdminRolePermissions { get; set; }
 
+  }
+
+
+  public enum Permission
+  {
+    [Description("Add")]
+    Add = 1,
+    [Description("Modify")]
+    Modify = 2,
+    [Description("Delete")]
+    Delete = 3,
+    [Description("Hide")]
+    Hide = 4,
+    [Description("Show")]
+    Show = 5
+  }
+
+
+  public static class PermissionExtension
+  {
+    public static string ToName(this Permission permission)
+    {
+      DescriptionAttribute[] attributes = (DescriptionAttribute[])permission
+        .GetType()
+        .GetField(permission.ToString())
+        .GetCustomAttributes(typeof(DescriptionAttribute), false);
+      return attributes.Length > 0 ? attributes[0].Description : string.Empty;
+    }
   }
 }

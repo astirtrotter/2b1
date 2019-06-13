@@ -19,7 +19,7 @@ namespace TBOBackEnd.Models.Many2ManyRelationship
     public AdminRole AdminRole { get; set; }
 
     [Required]
-    public string AdminPermissionId { get; set; }
+    public Permission AdminPermissionId { get; set; }
     public AdminPermission AdminPermission { get; set; }
   }
 }
