@@ -31,7 +31,7 @@ namespace TBOBackEnd
     {
       // sql server database
       ConnectionString = Configuration.GetConnectionString("DefaultConnection");
-      services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+      services.AddDbContext<_AppDbContext>(options => options.UseSqlServer(ConnectionString));
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
