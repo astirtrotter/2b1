@@ -30,10 +30,6 @@ namespace TBOBackEnd.Models
     [Remote(action: "VerifyEmail", controller: "Admins")]
     public string Email { get; set; }
 
-    [Required]
-    public string AdminRoleId { get; set; }
-    public AdminRole AdminRole { get; set; }
-
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{0:G}", ApplyFormatInEditMode = true, NullDisplayText = "(no access)")]
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
@@ -43,6 +39,7 @@ namespace TBOBackEnd.Models
 
     public virtual string FullName { get => $"{FirstName} {LastName}"; }
 
+    public ICollection<AdminAdminRole> AdminAdminRoles { get; set; }
     public ICollection<AdminToken> AdminTokens { get; set; }
   }
 }

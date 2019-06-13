@@ -21,6 +21,8 @@ namespace TBOBackEnd.Models
     [DataType(DataType.MultilineText)]
     public string Description { get; set; }
 
+    /*****************************************************************************************************/
     public ICollection<AdminRolePermission> AdminRolePermissions { get; set; }
+
   }
 }
