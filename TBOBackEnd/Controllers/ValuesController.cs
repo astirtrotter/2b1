@@ -8,8 +8,10 @@ namespace TBOBackEnd.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class ValuesController : ControllerBase
+  public class ValuesController : _BaseController
   {
+    public ValuesController(_AppDbContext context) : base(context) { }
+
     // GET api/values
     [HttpGet]
     public ActionResult<IEnumerable<string>> Get()
