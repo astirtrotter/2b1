@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TBOBackEnd.Models;
+using TBOBackEnd.Utils;
 
 namespace TBOBackEnd.Database
 {
@@ -16,18 +17,20 @@ namespace TBOBackEnd.Database
       using (var scope = host.Services.CreateScope())
       {
         var serviceProvider = scope.ServiceProvider;
-        var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+        //var logger = serviceProvider.GetRequiredService<ILogger<_AppDbContext>>();
         try
         {
           var context = serviceProvider.GetRequiredService<_AppDbContext>();
           context.Database.EnsureCreated();
           SeedAdmins(context);
           SeedAdminRoles(context);
-          logger.LogInformation("Seeding the database has been successfully finished.");
+          //logger.LogInformation($"Seeding the database has been successfully finished. {DateTime.Now}");
+          Logger.Debug("Seeding the database has been successfully finished.");
         }
         catch (Exception e)
         {
-          logger.LogError(e, "An error occurred while seeding the database.");
+          Logger.Debug("An error occurred while seeding the database.");
+          //logger.LogError(e, $"An error occurred while seeding the database. {DateTime.Now}");
         }
       }
 
