@@ -15,15 +15,6 @@ namespace TBOBackEnd
   public class Program
   {
     public static void Main(string[] args) => CreateWebHostBuilder(args)
-      //.UseKestrel() // default
-      //.UseContentRoot(Directory.GetCurrentDirectory()) // default
-      .ConfigureLogging((hostingContext, logging) =>
-      {
-        logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-        logging.AddConsole();
-        logging.AddDebug();
-        logging.AddEventSourceLogger();
-      })
       .Build()
       .InitDatabase()
       .Run();
