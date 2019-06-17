@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,10 +22,13 @@ namespace TBOBackEnd
   public class Startup
   {
     public static string ConnectionString { get; private set; }
+    public static ILoggerRepository repository { get; set; }
 
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
+      repository = LogManager.CreateRepository("NETCoreRepository");
+      XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));
     }
 
     public IConfiguration Configuration { get; }
@@ -31,7 +38,7 @@ namespace TBOBackEnd
     {
       // sql server database
       ConnectionString = Configuration.GetConnectionString("DefaultConnection");
-      services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+      services.AddDbContext<_AppDbContext>(options => options.UseSqlServer(ConnectionString));
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -70,8 +77,11 @@ namespace TBOBackEnd
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
+      var log = LogManager.GetLogger(repository.Name, typeof(Startup));
+      log.Info("Startup->Configure");
+
       app.UseCors("default");
 
       if (env.IsDevelopment())
