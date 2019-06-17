@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TBOBackEnd.Migrations
 {
-    public partial class Mg1 : Migration
+    public partial class M1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AdminAccountStatus",
+                name: "AdminAccountStatuses",
                 columns: table => new
                 {
                     AccountStatus = table.Column<int>(nullable: false),
@@ -17,7 +17,7 @@ namespace TBOBackEnd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdminAccountStatus", x => x.AccountStatus);
+                    table.PrimaryKey("PK_AdminAccountStatuses", x => x.AccountStatus);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,15 +54,15 @@ namespace TBOBackEnd.Migrations
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Email = table.Column<string>(nullable: false),
                     AdminAccountStatusId = table.Column<int>(nullable: false),
-                    LastAccessedAt = table.Column<DateTime>(nullable: false)
+                    LastAccessedAt = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Admins", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Admins_AdminAccountStatus_AdminAccountStatusId",
+                        name: "FK_Admins_AdminAccountStatuses_AdminAccountStatusId",
                         column: x => x.AdminAccountStatusId,
-                        principalTable: "AdminAccountStatus",
+                        principalTable: "AdminAccountStatuses",
                         principalColumn: "AccountStatus",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -89,6 +89,27 @@ namespace TBOBackEnd.Migrations
                         name: "FK_AdminRolePermission_AdminRoles_AdminRoleId",
                         column: x => x.AdminRoleId,
                         principalTable: "AdminRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AdminActivities",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AdminId = table.Column<string>(nullable: false),
+                    Action = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdminActivities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AdminActivities_Admins_AdminId",
+                        column: x => x.AdminId,
+                        principalTable: "Admins",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -138,6 +159,11 @@ namespace TBOBackEnd.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AdminActivities_AdminId",
+                table: "AdminActivities",
+                column: "AdminId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AdminAdminRole_AdminId",
                 table: "AdminAdminRole",
                 column: "AdminId");
@@ -171,6 +197,9 @@ namespace TBOBackEnd.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AdminActivities");
+
+            migrationBuilder.DropTable(
                 name: "AdminAdminRole");
 
             migrationBuilder.DropTable(
@@ -189,7 +218,7 @@ namespace TBOBackEnd.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "AdminAccountStatus");
+                name: "AdminAccountStatuses");
         }
     }
 }

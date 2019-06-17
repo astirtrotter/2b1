@@ -33,7 +33,7 @@ namespace TBOBackEnd.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<DateTime>("LastAccessedAt")
+                    b.Property<DateTime?>("LastAccessedAt")
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("LastName")
@@ -55,7 +55,30 @@ namespace TBOBackEnd.Migrations
 
                     b.HasKey("AccountStatus");
 
-                    b.ToTable("AdminAccountStatus");
+                    b.ToTable("AdminAccountStatuses");
+                });
+
+            modelBuilder.Entity("TBOBackEnd.Models.AdminActivity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Action");
+
+                    b.Property<string>("AdminId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
+
+                    b.ToTable("AdminActivities");
                 });
 
             modelBuilder.Entity("TBOBackEnd.Models.AdminPermission", b =>
@@ -148,6 +171,14 @@ namespace TBOBackEnd.Migrations
                     b.HasOne("TBOBackEnd.Models.AdminAccountStatus", "AdminAccountStatus")
                         .WithMany("Admins")
                         .HasForeignKey("AdminAccountStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TBOBackEnd.Models.AdminActivity", b =>
+                {
+                    b.HasOne("TBOBackEnd.Models.Admin", "Admin")
+                        .WithMany()
+                        .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
