@@ -11,9 +11,11 @@ namespace TBOBackEnd
     }
 
     public virtual DbSet<Admin> Admins { get; set; }
-    public virtual DbSet<AdminToken> AdminTokens { get; set; }
-    public virtual DbSet<AdminRole> AdminRoles { get; set; }
+    public virtual DbSet<AdminAccountStatus> AdminAccountStatuses { get; set; }
+    public virtual DbSet<AdminActivity> AdminActivities { get; set; }
     public virtual DbSet<AdminPermission> AdminPermissions { get; set; }
+    public virtual DbSet<AdminRole> AdminRoles { get; set; }
+    public virtual DbSet<AdminToken> AdminTokens { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

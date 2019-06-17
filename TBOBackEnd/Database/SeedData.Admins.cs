@@ -13,6 +13,14 @@ namespace TBOBackEnd.Database
       if (context.Admins.Any()) return;
 
       var accountStatusValues = Enum.GetValues(typeof(AccountStatus));
+      context.Add(new Admin
+      {
+        Id = RandomGenerator.GenerateUUID(),
+        FirstName = "Pro",
+        LastName = "Dev",
+        Email = "admin@tbo.com",
+        AdminAccountStatusId = AccountStatus.Active
+      });
       context.Admins.AddRange(Enumerable.Range(1, 5).Select(index => new Admin
       {
         Id = RandomGenerator.GenerateUUID(),
@@ -20,7 +28,6 @@ namespace TBOBackEnd.Database
         LastName = RandomGenerator.GenerateName(),
         Email = RandomGenerator.GenerateEmail(index),
         AdminAccountStatusId = (AccountStatus)accountStatusValues.GetValue(RandomGenerator.GenerateNumber(accountStatusValues.Length)),
-        LastAccessedAt = DateTime.Now
       }));
       context.SaveChanges();
     }

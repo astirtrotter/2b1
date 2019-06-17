@@ -38,7 +38,7 @@ namespace TBOBackEnd.Models
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{0:G}", ApplyFormatInEditMode = true, NullDisplayText = "(no access)")]
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-    public DateTime LastAccessedAt { get; set; } = DateTime.Now;
+    public DateTime? LastAccessedAt { get; set; } = DateTime.Now;
 
     /*****************************************************************************************************/
 

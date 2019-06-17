@@ -23,6 +23,7 @@ namespace TBOBackEnd.Database
         {
           var context = serviceProvider.GetRequiredService<_AppDbContext>();
           context.Database.EnsureCreated();
+          SeedAdminAccountStatus(context);
           SeedAdmins(context);
           SeedAdminRoles(context);
 
@@ -30,6 +31,7 @@ namespace TBOBackEnd.Database
         }
         catch (Exception e)
         {
+          log.Debug(e);
           log.Debug("An error occurred while seeding the database.");
         }
       }
