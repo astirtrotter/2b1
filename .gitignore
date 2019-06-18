@@ -332,3 +332,6 @@ ASALocalRun/
 # log
 log-file.log
 logfile/
+
+# database migration
+Migrations/
