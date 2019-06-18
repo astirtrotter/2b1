@@ -32,8 +32,18 @@ namespace TBOBackEnd.Models
     public string Email { get; set; }
 
     [Required]
+    public byte[] PasswordHash { get; set; }
+
+    [Required]
+    public byte[] PasswordSalt { get; set; }
+
+    [Required]
     public AccountStatus AdminAccountStatusId { get; set; }
     public AdminAccountStatus AdminAccountStatus { get; set; }
+
+    [DataType(DataType.DateTime)]
+    [DisplayFormat(DataFormatString = "{0:G}")]
+    public DateTime CreatedAt { get; set; }
 
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{0:G}", ApplyFormatInEditMode = true, NullDisplayText = "(no access)")]
