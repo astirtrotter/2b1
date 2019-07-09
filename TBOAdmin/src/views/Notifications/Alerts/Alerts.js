@@ -61,7 +61,7 @@ class Alerts extends Component {
           <Col xs="12" md="6">
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>Alerts</strong>
+                <i className="fa fa-align-justify"/><strong>Alerts</strong>
                 <small> use <code>.alert-link</code> to provide links</small>
               </CardHeader>
               <CardBody>
@@ -127,7 +127,7 @@ class Alerts extends Component {
           <Col xs="12" md="6">
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>Alerts</strong>
+                <i className="fa fa-align-justify"/><strong>Alerts</strong>
                 <small>dismissing</small>
               </CardHeader>
               <CardBody>

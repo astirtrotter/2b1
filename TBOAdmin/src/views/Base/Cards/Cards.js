@@ -54,7 +54,7 @@ class Cards extends Component {
               <CardHeader>
                 Card with icon
                 <div className="card-header-actions">
-                  <i className="fa fa-check float-right"></i>
+                  <i className="fa fa-check float-right"/>
                 </div>
               </CardHeader>
               <CardBody>
