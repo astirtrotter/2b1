@@ -81,7 +81,7 @@ class Modals extends Component {
           <Col>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i> Bootstrap Modals
+                <i className="fa fa-align-justify"/> Bootstrap Modals
               </CardHeader>
               <CardBody>
                 <Button onClick={this.toggle} className="mr-1">Launch demo modal</Button>
