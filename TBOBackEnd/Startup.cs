@@ -41,6 +41,11 @@ namespace TBOBackEnd
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.Configure<IISOptions>(options =>
+      {
+        options.AutomaticAuthentication = false;
+      });
+
       // sql server database
       ConnectionString = Configuration.GetConnectionString("DefaultConnection");
       services.AddDbContext<_AppDbContext>(options => options.UseSqlServer(ConnectionString));

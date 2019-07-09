@@ -31,7 +31,7 @@ namespace TBOBackEnd.Models
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{0:G}", ApplyFormatInEditMode = true)]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; }
   }
 
 
