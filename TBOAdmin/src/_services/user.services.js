@@ -16,16 +16,16 @@ function login(username, password) {
 
   return fetch(API_URL.LOGIN, requestOptions)
     .then(handleResponse)
-    .then(user => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem('user', JSON.stringify(user));
-      return user;
-    })
+    .then(token => {
+      // store jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('token', JSON.stringify(token));
+      return token;
+    });
 }
 
 function logout() {
-  // remove user from local storage to log user out
-  localStorage.removeItem('user');
+  // remove token from local storage to log user out
+  localStorage.removeItem('token');
 }
 
 function register(user) {
@@ -35,7 +35,13 @@ function register(user) {
     body: JSON.stringify(user)
   };
 
-  return fetch(API_URL.REGISTER, requestOptions).then(handleResponse);
+  return fetch(API_URL.REGISTER, requestOptions)
+    .then(handleResponse)
+    .then(token => {
+      // store jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('token', JSON.stringify(token));
+      return token;
+    });
 }
 
 function handleResponse(response) {
