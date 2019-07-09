@@ -1,11 +1,11 @@
-import {userConstants} from "../_constants";
+import {adminConstants} from "../_constants";
 
 export function registeration(state = {}, action) {
   switch (action.isPrototypeOf()) {
-    case userConstants.REGISTER_REQUEST:
+    case adminConstants.REGISTER_REQUEST:
       return {registering: true};
-    case userConstants.REGISTER_SUCCESS:
-    case userConstants.REGISTER_FAILURE:
+    case adminConstants.REGISTER_SUCCESS:
+    case adminConstants.REGISTER_FAILURE:
       return {};
     default:
       return state;

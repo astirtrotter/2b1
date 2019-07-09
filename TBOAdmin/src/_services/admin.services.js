@@ -1,47 +1,57 @@
 import {authHeader} from "../_helpers";
-import {API_URL} from "../_config";
+import {apiUrl} from "../_config";
 
-export const userServices = {
+export const adminServices = {
   login,
   logout,
-  register
+  register,
+  getInfo
 };
 
-function login(username, password) {
+function login(adminId, password) {
   const requestOptions = {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({username, password})
+    body: JSON.stringify({adminId, password})
   };
 
-  return fetch(API_URL.LOGIN, requestOptions)
+  return fetch(apiUrl.adminLogin, requestOptions)
     .then(handleResponse)
     .then(token => {
-      // store jwt token in local storage to keep user logged in between page refreshes
+      // store jwt token in local storage to keep admin logged in between page refreshes
       localStorage.setItem('token', JSON.stringify(token));
       return token;
     });
 }
 
 function logout() {
-  // remove token from local storage to log user out
+  // remove token from local storage to log out
   localStorage.removeItem('token');
 }
 
-function register(user) {
+function register(admin) {
   const requestOptions = {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(user)
+    body: JSON.stringify(admin)
   };
 
-  return fetch(API_URL.REGISTER, requestOptions)
+  return fetch(apiUrl.adminRegister, requestOptions)
     .then(handleResponse)
     .then(token => {
-      // store jwt token in local storage to keep user logged in between page refreshes
+      // store jwt token in local storage to keep admin logged in between page refreshes
       localStorage.setItem('token', JSON.stringify(token));
       return token;
     });
+}
+
+function getInfo() {
+  const requestOptions = {
+    method: 'GET',
+    headers: {...authHeader(), 'Content-Type': 'application/json'},
+  };
+
+  return fetch(apiUrl.adminGetInfo, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
