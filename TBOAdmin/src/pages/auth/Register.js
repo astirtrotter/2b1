@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+
+    if (localStorage.getItem('token')) {
+      window.location.replace('/');
+    }
+  }
+
   render() {
     return (
       <div className="app flex-row align-items-center">

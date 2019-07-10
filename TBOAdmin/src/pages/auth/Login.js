@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, FormFeedback, FormText, Row } from 'reactstrap';
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    if (localStorage.getItem('token')) {
+      window.location.replace('/');
+    }
+  }
+
   render() {
     return (
       <div className="app flex-row align-items-center">
