@@ -5,7 +5,7 @@ import { history } from './_helpers';
 // import { renderRoutes } from 'react-router-config';
 import './App.scss';
 import {alertActions} from "./_actions";
-import {Container, Alert} from "reactstrap";
+import {UncontrolledAlert} from "reactstrap";
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
@@ -37,18 +37,24 @@ class App extends Component {
   }
 
   render() {
+    const {alert} = this.props;
     return (
-        <Router history={history}>
-          <React.Suspense fallback={loading()}>
-            <Switch>
-              <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>}/>
-              <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>}/>
-              {/*<Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />*/}
-              {/*<Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />*/}
-              <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>}/>
-            </Switch>
-          </React.Suspense>
-        </Router>
+      <Router history={history}>
+        <React.Suspense fallback={loading()}>
+          {
+            alert.message &&
+            <UncontrolledAlert color={alert.type} toggle={this.dismissAlert}>{alert.message}</UncontrolledAlert>
+          }
+          <UncontrolledAlert color="danger" style={{position: 'fixed', width:'100%'}}>Danger Alert</UncontrolledAlert>
+          <Switch>
+            <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>}/>
+            <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>}/>
+            {/*<Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />*/}
+            {/*<Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />*/}
+            <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>}/>
+          </Switch>
+        </React.Suspense>
+      </Router>
     );
   }
 }
