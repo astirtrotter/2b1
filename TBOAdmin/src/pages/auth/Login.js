@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, FormFeedback, FormText, Row } from 'reactstrap';
 
 class Login extends Component {
   render() {
@@ -21,7 +21,10 @@ class Login extends Component {
                             <i className="icon-user"/>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Username" autoComplete="username" />
+                        <Input invalid={true} valid={true} type="text" placeholder="Username" autoComplete="username" />
+                        <FormFeedback valid>Sweet! that name is available</FormFeedback>
+                        <FormFeedback invalid>Oh noes! that name is already taken</FormFeedback>
+                        <FormText>Example help text that remains unchanged.</FormText>
                       </InputGroup>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">

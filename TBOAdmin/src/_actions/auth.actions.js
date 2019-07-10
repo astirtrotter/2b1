@@ -26,7 +26,7 @@ function login(username, password) {
       )
   };
 
-  function request(user) { return { type: adminConstants.LOGIN_REQUEST, user } }
+  function request(admin) { return { type: adminConstants.LOGIN_REQUEST, admin } }
   function success(token) { return { type: adminConstants.LOGIN_SUCCESS, token } }
   function failure(error) { return { type: adminConstants.LOGIN_FAILURE, error } }
 }

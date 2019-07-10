@@ -3,12 +3,12 @@ import {adminConstants} from "../_constants";
 let token = JSON.parse(localStorage.getItem('token'));
 const initialState = token ? {loggedIn: true, token} : {};
 
-export function authentication(state = initialState, action) {
+export function auth(state = initialState, action) {
   switch (action.type) {
     case adminConstants.LOGIN_REQUEST:
       return {
         loggingIn: true,
-        user: action.user
+        admin: action.admin
       };
     case adminConstants.LOGIN_SUCCESS:
       return {

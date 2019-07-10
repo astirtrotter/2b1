@@ -19,6 +19,6 @@ function info(message) {
   return {type: alertConstants.INFO, message};
 }
 
-function clear(message) {
+function clear() {
   return {type: alertConstants.CLEAR};
 }
