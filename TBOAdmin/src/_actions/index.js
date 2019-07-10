@@ -1,1 +1,1 @@
-export * from './admin.actions';
+export * from './auth.actions';

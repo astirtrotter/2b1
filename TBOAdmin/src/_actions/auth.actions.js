@@ -1,8 +1,8 @@
 import { history } from "../_helpers";
 import {adminConstants} from "../_constants";
-import {adminServices} from "../_services";
+import {authServices} from "../_services";
 
-export const adminActions = {
+export const authActions = {
   login,
   logout,
   register,
@@ -12,7 +12,7 @@ export const adminActions = {
 function login(username, password) {
   return dispatch => {
     dispatch(request({username}));
-    adminServices.login(username, password)
+    authServices.login(username, password)
       .then(
         token => {
           dispatch(success(token));
@@ -32,7 +32,7 @@ function login(username, password) {
 }
 
 function logout() {
-  adminServices.logout();
+  authServices.logout();
   return {type: adminConstants.LOGOUT};
 }
 
@@ -40,7 +40,7 @@ function register(admin) {
   return dispatch => {
     dispatch(request(admin));
 
-    adminServices.register(admin)
+    authServices.register(admin)
       .then(
         token => {
           dispatch(success(token));
@@ -63,7 +63,7 @@ function getInfo() {
   return dispatch => {
     dispatch(request());
 
-    adminServices.getInfo()
+    authServices.getInfo()
       .then(
         admin => {
           dispatch(success(admin));
